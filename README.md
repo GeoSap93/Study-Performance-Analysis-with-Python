@@ -23,6 +23,7 @@ Data columns (total 8 columns):
 dtypes: int64(3), object(5)
 
 The data in all five string columns are splint into the following variables: 
+
 Gender: ['female' 'male']
 Race_ethnicity: ['group B' 'group C' 'group A' 'group D' 'group E']
 Parental_level_of_education: ["bachelor's degree" 'some college' "master's degree" "associate's degree" 'high school' 'some high school']
