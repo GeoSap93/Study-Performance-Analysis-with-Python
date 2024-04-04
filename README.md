@@ -30,11 +30,44 @@ Parental_level_of_education: ["bachelor's degree" 'some college' "master's degre
 Lunch: ['standard' 'free/reduced']
 Test_preparation_score: ['none' 'completed']
 
+The folowing tables show the size of the group based on the string data:
 
+ gender  size
+0  female   518
+1    male   482
 
+In this research, took part 518 female students and 482 male students.
 
+race_ethnicity  size
+0        group A    89
+1        group B   190
+2        group C   319
+3        group D   262
+4        group E   140
 
+Between the race/ethinicity groups, the group C had most participants and the group A had the least. 
 
+parental_level_of_education  size
+0          associate's degree   222
+1           bachelor's degree   118
+2                 high school   196
+3             master's degree    59
+4                some college   226
+5            some high school   179
+
+On the parental level of education, we had only 59 with a master degree and 118 with a bachelor. 
+
+   lunch  size
+0  free/reduced   355
+1      standard   645
+
+In terms of the lunch size, most of the students had a standard lunch.
+
+test_preparation_course  size
+0               completed   358
+1                    none   642
+
+A persentage of 64.2% had no preparation for the tests and the rest 35.8% were prepared.
 
 During the analysis was carried our correlations between numeric columns (maths, reading and writing scores) only with the use of excel.
 
