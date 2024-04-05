@@ -10,8 +10,7 @@ The table below shows all info about our file. Our file has 8 columns which are 
 The total amount of students participating in this research was 1000.
 
 Data columns (total 8 columns):
-    Column                       Non-Null Count  Dtype 
-
+     Column                       Non-Null Count  Dtype 
  0   gender                       1000 non-null   object
  1   race_ethnicity               1000 non-null   object
  2   parental_level_of_education  1000 non-null   object
