@@ -1,1 +1,230 @@
+import pandas as pd
+import seaborn as sns
+import numpy as np
+from matplotlib import pyplot as plt
 
+# Load the dataset
+# pd.options.display.max_rows = 100
+df = pd.read_csv('study_performance.csv')
+# print(df)
+print(df.to_string())  # Prints the entire DataFrame
+# print(df['math_score'].corr(df['reading_score']))
+
+
+# Data Exploration / Pandas Analysing Data
+print(df.head(10))  # To view the first 10 rows/ .head() gives automatically the first 5 rows
+print(df.tail(10))  # To view the last 10 rows/ .tail () gives automatically the last 5 rows
+print(df.info())  # General Information about the composition of our data
+
+# Data Exploration / Slicing specific rows and columns
+rows = df.loc[[2, 6, 9]]
+print(rows)
+col = df.loc[:, 'gender']  # All rows for specific column. Here the column is "gender"
+print(col)
+# gen_race = df[['gender','race_ethnicity']]
+# print(gen_race) -- Fastest way for all rows but specific columns
+col_1 = df.loc[:10, ['gender', 'race_ethnicity']]  # Specific rows (the first 10) and specific columns
+print(col_1)
+
+# Cleaning Data with Pandas (find more in https://www.w3schools.com/python/pandas/pandas_cleaning_wrong_data.asp)
+
+# Cleaning empty cells
+# Remove empty rows
+# import pandas as pd
+
+# df = pd.read_csv('study_performance.csv')
+
+# new_df = df.dropna()  # df.dropna(inplace = True) if we want to change the original DataFrame
+
+# print(new_df.to_string())
+
+# Replace empty values (null values with a specific number)
+
+# import pandas as pd
+
+# df = pd.read_csv('study_performance.csv')
+# df.fillna(130, inplace=True)
+
+# Find duplicates
+# import pandas as pd
+
+# df = pd.read_csv('study_performance.csv')
+print(df.duplicated())
+
+# Remove duplicates
+# import pandas as pd
+
+# df = pd.read_csv('study_performance.csv')
+df.drop_duplicates(inplace=True)
+print(df.to_string())
+
+# Correlations- The corr() method ignores "not numeric" columns.
+# import pandas as pd
+
+# df = pd.read_csv('study_performance.csv')
+
+print(df.corr())
+
+# Correlations
+
+# data = df[['reading_score', 'writing_score']]
+# correlation = data.corr(method='pearson')
+# Distinct Values for gender, race_ethnicity, parental_level_of_education, lunch, test_preparation_course
+
+print(df['gender'].unique())
+print(df['race_ethnicity'].unique())
+print(df['parental_level_of_education'].unique())
+print(df['lunch'].unique())
+print(df['test_preparation_course'].unique())
+
+# Grouping data based on gender and calculating by using aggregate functions for all subjects
+gender_vs_scores = df.groupby("gender", as_index=False).agg(
+    {'math_score': ['mean', 'max', 'min'], 'reading_score': ['mean', 'max', 'min'],
+     'writing_score': ['mean', 'max', 'min']})
+print(gender_vs_scores)
+
+# Grouping data based on race and calculating by using aggregate functions for all subjects
+race_vs_scores = df.groupby("race_ethnicity", as_index=False).agg(
+    {'math_score': ['mean', 'max', 'min'], 'reading_score': ['mean', 'max', 'min'],
+     'writing_score': ['mean', 'max', 'min']})
+print(race_vs_scores)
+
+# Grouping data based on parental level of education and calculating by using aggregate functions for all subjects
+parental_level_vs_scores = df.groupby("parental_level_of_education", as_index=False).agg(
+    {'math_score': ['mean', 'max', 'min'], 'reading_score': ['mean', 'max', 'min'],
+     'writing_score': ['mean', 'max', 'min']})
+print(parental_level_vs_scores)
+
+# Grouping data based on lunch and calculating by using aggregate functions for all subjects
+lunch_vs_scores = df.groupby("lunch", as_index=False).agg(
+    {'math_score': ['mean', 'max', 'min'], 'reading_score': ['mean', 'max', 'min'],
+     'writing_score': ['mean', 'max', 'min']})
+print(lunch_vs_scores)
+
+# Grouping data based on test preparation and calculating by using aggregate functions for all subjects
+test_preparation_vs_scores = df.groupby("test_preparation_course", as_index=False).agg(
+    {'math_score': ['mean', 'max', 'min'], 'reading_score': ['mean', 'max', 'min'],
+     'writing_score': ['mean', 'max', 'min']})
+print(test_preparation_vs_scores)
+
+
+# Grouping by gender and finding the number of males and females taking part in this group
+gender_size = df.groupby("gender", as_index=False).size()
+print(gender_size)
+
+# Grouping by ethnic group and finding the number of people in all groups
+ethnic_size = df.groupby("race_ethnicity", as_index=False).size()
+print(ethnic_size)
+
+# Grouping by the parents' education level and finding the amount of people in all levels of education
+parents_education_size = df.groupby("parental_level_of_education", as_index=False).size()
+print(parents_education_size)
+
+# Grouping by the lunch and finding the amount of people in each sub-category
+lunch_size = df.groupby("lunch", as_index=False).size()
+print(lunch_size)
+
+# Grouping by the preparation for the test and finding the amount of people in each sub-category
+prep_test_size = df.groupby("test_preparation_course", as_index=False).size()
+print(prep_test_size)
+
+# Grouping by gender and finding the average of all scores
+
+size_gender = df.groupby("gender").agg(
+    math_score_mean=('math_score', 'mean'),
+    reading_score_mean=('reading_score', 'mean'),
+    writing_score_mean=('writing_score', 'mean')
+).reset_index()
+
+# Reshaping the DataFrame
+size_gender_melted = size_gender.melt(id_vars='gender',
+                                      var_name='subject',
+                                      value_name='average_score')
+
+# Creating the bar-plot
+
+sns.barplot(x='gender', y='average_score', hue='subject', data=size_gender_melted)
+plt.title("The average scores of students based on their gender")
+plt.xlabel("Gender")
+plt.ylabel("Average Scores")
+plt.show()
+
+# Grouping by ethnic group and finding the average scores
+size_race = df.groupby('race_ethnicity').agg(
+    math_score_mean=('math_score', 'mean'),
+    reading_score_mean=('reading_score', 'mean'),
+    writing_score_mean=('writing_score', 'mean')
+).reset_index()
+
+# Reshaping the DataFrame
+size_race_melted = size_race.melt(id_vars='race_ethnicity',
+                                  var_name='subject',
+                                  value_name='average_score')
+
+# Creating the bar-plot
+
+sns.barplot(x='race_ethnicity', y='average_score', hue='subject', data=size_race_melted)
+plt.title("The average scores of students based on their race")
+plt.xlabel("Race/ Ethnicity")
+plt.ylabel("Average Scores")
+plt.show()
+
+# Grouping by the parents' education level and finding the average scores
+size_parental_education = df.groupby('parental_level_of_education').agg(
+    math_score_mean=('math_score', 'mean'),
+    reading_score_mean=('reading_score', 'mean'),
+    writing_score_mean=('writing_score', 'mean')
+).reset_index()
+
+# Reshaping the DataFrame
+size_parental_education_melted = size_parental_education.melt(id_vars='parental_level_of_education',
+                                                              var_name='subject',
+                                                              value_name='average_score')
+
+# Creating the bar-plot
+
+sns.barplot(x='parental_level_of_education', y='average_score', hue='subject', data=size_parental_education_melted)
+plt.title("The average scores of students based on their parental education")
+plt.xlabel("Parental Education")
+plt.ylabel("Average Scores")
+plt.show()
+
+# Grouping by the lunch and finding the average scores
+size_lunch = df.groupby('lunch').agg(
+    math_score_mean=('math_score', 'mean'),
+    reading_score_mean=('reading_score', 'mean'),
+    writing_score_mean=('writing_score', 'mean')
+).reset_index()
+
+# Reshaping the DataFrame
+size_lunch_melted = size_lunch.melt(id_vars='lunch',
+                                    var_name='subject',
+                                    value_name='average_score')
+
+# Creating the bar-plot
+
+sns.barplot(x='lunch', y='average_score', hue='subject', data=size_lunch_melted)
+plt.title("The average scores of students based on their lunch habits")
+plt.xlabel("Lunch")
+plt.ylabel("Average Scores")
+plt.show()
+
+# Grouping by the test preparation level and finding the average scores
+size_test_prep = df.groupby('test_preparation_course').agg(
+    math_score_mean=('math_score', 'mean'),
+    reading_score_mean=('reading_score', 'mean'),
+    writing_score_mean=('writing_score', 'mean')
+).reset_index()
+
+# Reshaping the DataFrame
+size_test_prep_melted = size_test_prep.melt(id_vars='test_preparation_course',
+                                            var_name='subject',
+                                            value_name='average_score')
+
+# Creating the bar-plot
+
+sns.barplot(x='test_preparation_course', y='average_score', hue='subject', data=size_test_prep_melted)
+plt.title("The average scores of students based on their test preparation")
+plt.xlabel("Test Preparation")
+plt.ylabel("Average Scores")
+plt.show()
