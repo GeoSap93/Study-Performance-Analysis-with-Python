@@ -37,7 +37,3 @@ During the analysis, correlations between numeric columns (maths, reading and wr
                 Reading vs Writing	0.955
 
 The results indicate a strong and positive correlation among all scores, suggesting that higher scores in math is associated with higher scores in reading and writing. Furthermore, there is a high correlation between reading and writing scores, implying that higher reading scores are likely to correspond with higher writing scores.
-
-# Visualisations Summary
-
-This analysis shows that female students achieved a better score in reading and writing tests but male students performed better in maths. Students that were well prepared for the tests and also had a standard meal brought better results compared to the ones that had free or reduced meal and didn't prepare for the test. Also, parental education plays an impportant role on the educational success students have as their parents work as role models and possibly more educated parents push their children more to study and follow a succesful carrear  
