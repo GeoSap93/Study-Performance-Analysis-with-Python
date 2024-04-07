@@ -6,19 +6,9 @@ The aim of this study is to examine the impact of parental background, test prep
 
 This analysis was conducted using Python to access and display the entire DataFrame, utilizing Pandas to explore the data (such as printing the first or last rows, displaying general information, and slicing specific rows or columns). Additionally, data cleaning tasks such as removing empty cells, replacing missing values, identifying and eliminating duplicates, and displaying the updated DataFrame were performed using the Pandas library.
 
-The table below provides details regarding our file, which consists of 8 columns including three numeric and five string data columns. A total of 1000 students participated in this research.
-
-Data columns (total 8 columns):
-     Column                       Non-Null Count  Dtype 
- 0   gender                       1000 non-null   object
- 1   race_ethnicity               1000 non-null   object
- 2   parental_level_of_education  1000 non-null   object
- 3   lunch                        1000 non-null   object
- 4   test_preparation_course      1000 non-null   object
- 5   math_score                   1000 non-null   int64 
- 6   reading_score                1000 non-null   int64 
- 7   writing_score                1000 non-null   int64 
-dtypes: int64(3), object(5)
+The table produced by using the function .info(), provides better insights on our file. It comprises 8 columns from which three are numeric and the rest five string. 
+A total of 1000 students participated in this research.
+Maths, Literacy and Reading Scores consist of our three numeric columns.
 
 The data in all five string columns are split into the following variables within brackets using the unique() function: 
 - Gender ('female', 'male')
